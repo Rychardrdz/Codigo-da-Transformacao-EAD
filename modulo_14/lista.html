@@ -1,0 +1,53 @@
+<h1>Lista de Produtos</h1>
+
+<form method="GET">
+
+    <input type="text" name="busca" placeholder="Buscar produto">
+
+    <button type="submit">
+        Buscar
+    </button>
+
+</form>
+
+{% for produto in produtos %}
+
+    <h2>{{ produto.nome }}</h2>
+
+    <p>{{ produto.descricao }}</p>
+
+    <p>Preço: R$ {{ produto.preco }}</p>
+
+    <p>Quantidade: {{ produto.quantidade }}</p>
+
+    <a href="{% url 'atualizar' produto.id %}">
+        Atualizar
+    </a>
+
+    <a href="{% url 'excluir' produto.id %}">
+        Excluir
+    </a>
+
+    <hr>
+
+{% endfor %}
+
+<div>
+
+    {% if produtos.has_previous %}
+
+        <a href="?page={{ produtos.previous_page_number }}">
+            Voltar
+        </a>
+
+    {% endif %}
+
+    {% if produtos.has_next %}
+
+        <a href="?page={{ produtos.next_page_number }}">
+            Próximo
+        </a>
+
+    {% endif %}
+
+</div>
